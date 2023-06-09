@@ -1,2 +1,2 @@
-# Tu-Calc-Factory-Functions
-<p><b>Calculadora feita com Factory Functions</b></p>
+# Tu-Calc-Factory-Function
+<p><b>Calculadora feita com Factory Function</b></p>
