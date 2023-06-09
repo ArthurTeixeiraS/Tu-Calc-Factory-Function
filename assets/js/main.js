@@ -1,8 +1,9 @@
-function criaCalculadora(){
+function criaCalculadora(){ //função factory para manipular a calculadora
+    //o this, nesse caso, se refere a constante calculadora, então this.clickBotoes() pode ser interpretado como calculadora.clickBotoes()
     return{
-        display:document.querySelector('.display'),
+        display:document.querySelector('.display'), //captura do elemento display
 
-        inicia(){
+        inicia(){ //metodo inicia, que starta a calculadora
             this.clickBotoes();
             this.pressionaEnter();
             
@@ -11,16 +12,16 @@ function criaCalculadora(){
         pressionaEnter(){
             this.display.addEventListener('keyup', e => {
                if(e.keyCode === 13){
-                this.realizaConta()
+                this.realizaConta() //executando a conta através do botão Enter
                } 
             })
         },
 
         realizaConta(){
             let conta = this.display.value;
-            try{
+            try{       
               conta = eval(conta);  //PERIGO!!! FUNÇÃO USADA PARA FINS DIDÁTICOS
-              if(!conta){
+              if(!conta){ 
                 alert('Conta inválida')
               }
               this.display.value = String(conta)
@@ -35,11 +36,11 @@ function criaCalculadora(){
         },
 
         deleteOne(){
-            this.display.value = this.display.value.slice(0, -1)
+            this.display.value = this.display.value.slice(0, -1) //slice para apagar digito por digito
         },
 
 
-        clickBotoes(){
+        clickBotoes(){ //função que captura os clicks para executar determinadas condições
             //this -> calculadora
             document.addEventListener('click', function(e){ //poderia usar uma arrow function para evitar que o this mudasse
                 const el = e.target;
@@ -56,12 +57,12 @@ function criaCalculadora(){
                 if(el.classList.contains('btn-eq')){
                     this.realizaConta();
                 }
-                this.display.focus();
+                this.display.focus(); //para o enter não repetir a ultima tecla clicada (isso ocorre por comportamento padrão dos Browsers)
             }.bind(this)) //bind faz com que o a função de captura use o this da clickBotoes()
                 
         },
 
-        btnParaDisplay(valor){
+        btnParaDisplay(valor){ //joga o valor do botão para o display
             this.display.value += valor
         }
     }
